@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- 指定字符集<a th: href="@{'/updateBack/'+ ${u.id}}" >修改</a>  -->
+<meta charset="utf-8">
+<!-- 使用Edge最新的浏览器的渲染方式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- viewport视口：网页可以根据设置的宽度自动进行适配，在浏览器的内部虚拟一个容器，容器的宽度与设备的宽度相同。
+    width: 默认宽度与设备的宽度相同
+    initial-scale: 初始的缩放比，为1:1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<title>班级信息管理</title>
+
+<!-- 1. 导入CSS的全局样式 -->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+<!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+<script src="./js/jquery-2.1.0.min.js"></script>
+<!-- 3. 导入bootstrap的js文件 -->
+<script src="./js/bootstrap.min.js"></script>
+<script>
+        function deleteStudent(id){
+            //用户安全提示
+            if(confirm("您确定要删除吗？")){
+                //访问路径
+                location.href="/deleteClass?id="+id;
+            }
+        }
+        window.onload = function(){
+            //给删除选中按钮添加单击事件
+            document.getElementById("delSelected").onclick = function(){
+                if(confirm("您确定要删除选中条目吗？")){
+
+                   var flag = false;
+                    //判断是否有选中条目
+                    var cbs = document.getElementsByName("uid");
+                    for (var i = 0; i < cbs.length; i++) {
+                        if(cbs[i].checked){
+                            //有一个条目选中了
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(flag){//有条目被选中
+                        //表单提交
+                        document.getElementById("form").submit();
+                    }
+                }
+            }
+            //1.获取第一个cb
+            document.getElementById("firstCb").onclick = function(){
+                //2.获取下边列表中所有的cb
+                var cbs = document.getElementsByName("uid");
+                //3.遍历
+                for (var i = 0; i < cbs.length; i++) {
+                    //4.设置这些cbs[i]的checked状态 = firstCb.checked
+                    cbs[i].checked = this.checked;
+                }
+            }
+        }
+    </script>
+<style type="text/css">
+td, th {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h3 style="text-align: center">班级信息列表</h3>
+		<div style="float: right; margin: 5px;">
+
+			<a class="btn btn-primary"
+				th:href="@{/addc}">添加班级</a>
+
+		</div>
+		<form id="form">
+			<table border="1" class="table table-bordered table-hover">
+				<tr class="success">
+					<th><input type="checkbox" id="firstCb"></th>
+					<th>编号</th>
+					<th>班级名称</th>
+					<th>班级介绍</th>
+					<th>操作</th>
+				</tr>
+
+				<tr th:each="s,sStat:${sclass}" >
+				<td><input type="checkbox" name="uid" th:value="${s.id}"></td>
+					<td th:text="${sStat.count}"></td>
+					<td th:text="${s.name}"></td>
+					<td th:text="${s.info}"></td>
+					<td>
+					<a class="btn btn-default btn-sm" th:href="@{/findStudentByClass?id={id}(id=${s.id})}">班级学生列表查询</a>
+					<a class="btn btn-default btn-sm" th:href="@{/findClassById?id={id}(id=${s.id})}">修改</a>
+					</td>
+				</tr>
+
+			</table>
+		</form>
+	</div>
+</body>
+</html>
