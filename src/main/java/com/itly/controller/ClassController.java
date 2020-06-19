@@ -52,7 +52,7 @@ public class ClassController {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		List<StudentCustom> student = studentService.findStudentByClassId(id);
 		model.addAttribute("student",student);
-		return "student";
+		return "studentList";
 	}
 	
 	@RequestMapping("/addc")

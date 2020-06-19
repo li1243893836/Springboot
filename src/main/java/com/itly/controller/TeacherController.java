@@ -22,7 +22,7 @@ public class TeacherController {
 	@Autowired
 	TeacherService teacherService;
 	
-	@RequestMapping("/teacher")
+	@RequestMapping("/teacherList")
 	public String teacher(Model model,HttpServletRequest request) {
 		List<Teacher> teacher = teacherService.findTeacherAll();
 		String[] ids = request.getParameterValues("uid");
@@ -33,7 +33,7 @@ public class TeacherController {
 			return "redirect:/teacher";
 		}
 		model.addAttribute("teacher",teacher);
-		return "teacher";
+		return "teacherList";
 	}
 	@RequestMapping("/deleteTeacher")
 	public String deleteTeacher(HttpServletRequest request) {
@@ -89,6 +89,6 @@ public class TeacherController {
 			return "redirect:/teacher";
 		}
 		model.addAttribute("teacher",teacher);
-		return "teacher";
+		return "teacherList";
 	}
 }

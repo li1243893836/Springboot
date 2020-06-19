@@ -43,7 +43,7 @@ public class StudentController {
 		return "student";
 	}
 	
-	@RequestMapping("/student")
+	@RequestMapping("/studentList")
 	public String StudentCustom(Model model,HttpServletRequest request) {
 		List<StudentCustom> student = studentService.findCustomAll();
 		String[] ids = request.getParameterValues("uid");
@@ -51,10 +51,10 @@ public class StudentController {
 			for(String id : ids) {
 				studentService.deleteStudent(Integer.parseInt(id));
 			}
-			return "redirect:/student";
+			return "redirect:/studentList";
 		}
 		model.addAttribute("student",student);
-		return "student";
+		return "studentList";
 	}
 	
 	@RequestMapping("/findStudentById")
@@ -117,7 +117,7 @@ public class StudentController {
 			return "redirect:/student";
 		}
 		model.addAttribute("student",student);
-		return "student";
+		return "studentList";
 	}
 	
 	@RequestMapping("/findStudentScore")

@@ -36,7 +36,7 @@ public class CourseController {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		List<StudentCustom> student = studentService.findStudentByCourse(id);
 		model.addAttribute("student", student);
-		return "student";
+		return "studentList";
 	}
 	
 

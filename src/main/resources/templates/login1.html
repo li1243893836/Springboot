@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+ 
+
+    <title>登录页</title>
+
+    <link rel="stylesheet" href="./css/layui.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+ 
+
+</head>
+
+<body>
+
+ 
+
+<div class="login-main">
+
+    <header class="layui-elip">登录</header>
+
+    <form action="/loginAdmin" th:action="@{/loginAdmin}" th:object="${admin}"
+			method="post">
+
+        <div class="layui-input-inline">
+
+            <input type="text" name="name" required lay-verify="required" placeholder="用户名" autocomplete="off"
+
+                   class="layui-input">
+
+        </div>
+
+        <div class="layui-input-inline">
+
+            <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+
+                   class="layui-input">
+
+        </div>
+
+        <div class="layui-input-inline login-btn">
+
+            <input  class="layui-btn" type = "submit" value = "登录"/>
+
+        </div>
+
+        <hr/>
+
+        <!--  <div class="layui-input-inline">
+
+            <button type="button" class="layui-btn layui-btn-primary">QQ登录</button>
+
+        </div>
+
+        <div class="layui-input-inline">
+
+            <button type="button" class="layui-btn layui-btn-normal">微信登录</button>
+
+        </div>-->
+
+        <p><a href="" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+
+    </form>
+    <div th:text="${mrc}" th:object="${mrc}" th:if="${not #strings.isEmpty(mrc)}">
+			<div class="alert alert-warning alert-dismissible" >
+				<button type="button" class="close" >
+					<span>&times;</span>
+				</button>
+				<strong th:text = "${mrc}"></strong>
+			</div>
+		</div>
+
+</div>
+
+ 
+
+ 
+
+<script src="./layui.js"></script>
+
+<script type="text/javascript">
+
+    
+</script>
+
+</body>
+
+</html>
